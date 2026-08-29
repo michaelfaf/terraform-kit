@@ -1,0 +1,56 @@
+# IMPLEMENT — <system> install walkthrough
+
+> **To the AI running this:** this file is your script and `STATUS.md` is your memory — update it after every scan, decision, and phase, not at the end. A human can follow this file by hand; every step is doable without an AI. Present decisions conversationally, one at a time. Adapt to the user's stack; never transplant paths or names that don't fit it. **Set the time expectation when you confirm the go-ahead:** the install is about <X> minutes; the first real run in Phase 3 is <Y>.
+
+## What you are installing
+
+<The mechanism, in one table or tight paragraph. The recipient's AI must understand the thing, not just execute the steps.>
+
+## Phase 0 — Environment scan
+
+Before asking anything, establish and record in STATUS.md's scan table:
+
+1. **What am I?** Platform and capabilities: file access? shell? parallel subagents? per-task model choice? persistent memory?
+2. **Where does the user's work live?** A folder, a vault, a git repo, a shared drive?
+3. **Existing conventions:** is there a standing instructions file (CLAUDE.md, AGENTS.md, a rules file, a system prompt, a "start here" note)? Read it — Phase 2 merges into it, never overwrites.
+4. **<Kit-specific prerequisites>** — record each as present or absent.
+
+**Chat-only fallback:** no file access means you narrate every step, the user creates the files, and STATUS.md lives in a note they paste back at the start of each session. The procedure is unchanged.
+
+## Phase 1 — Decisions
+
+Work through these in order. Record each in STATUS.md before moving on.
+
+### DP-1 — <question in plain words>
+
+**Options:**
+- **A. <name>** — <what it is>. *Trade-off:* <cost>.
+- **B. <name>** — <what it is>. *Trade-off:* <cost>.
+
+**Recommendation:** <lean, conditioned on the scan, with the reasoning.> Default if the user says "whatever you recommend": <the same conditional, spelled out>.
+
+## Phase 2 — Install
+
+1. <Create the artifacts. Adapt minimally — rename only terms that clash with the user's vocabulary.>
+2. **Wire the standing instructions file** (the stickiness step — an install that only creates folders dies at the first new chat). Add to their CLAUDE.md / AGENTS.md / rules file, merged into their format:
+   > <the one-paragraph routing line>
+
+   **Scope warning:** some platforms scope instruction files to a workspace or folder. Put the wiring where the user's AI actually works, and tell them where it landed.
+3. Record every install path in STATUS.md.
+
+## Phase 3 — First live run — on something real
+
+<Run the system end to end on something the user actually cares about. Finish with a verification test that proves the install — ideally a cold read where a fresh session reconstructs the state from the installed files alone.>
+
+## Phase 4 — Wrap
+
+1. Walk the user through what's installed and where.
+2. Tick every phase in STATUS.md; empty the Blockers row or say what remains.
+3. Leave the habit behind, one line: **"<the habit>"**
+4. Confirm the install record is preserved outside this repo — then the kit folder is safe to delete.
+
+## If things go wrong
+
+- **A capability is missing:** take the nearest degradation path named in the decision point — every step has a sequential or chat-only form.
+- **The user's conventions conflict with this kit's names:** keep their names, map the jobs.
+- **A step fails twice:** don't loop. Note it in STATUS.md Blockers, take the fallback, and tell the user.

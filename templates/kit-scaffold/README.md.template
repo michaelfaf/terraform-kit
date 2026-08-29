@@ -1,0 +1,41 @@
+# <System name> — implementation kit
+
+<One paragraph: what this installs, where it came from, and the fact that this repo is an installer rather than the thing itself.>
+
+## Read this first — what this is and why
+
+**The problem.** <The pain, in the reader's words, before any solution language.>
+
+**What this installs.** <The mechanism in three or four sentences.>
+
+**Use it if:** <signal> · <signal> · <signal>
+
+**Concrete use cases:** <case> · <case> · <case> · <case>
+
+**It is not** <the two or three things people will mistake it for>.
+
+<!-- Explainer-depth gate: delete the next line, and the OVERVIEW row in the table below, if this kit ships at lean depth (README only). -->
+**→ Want the full picture first?** Read [OVERVIEW.md](OVERVIEW.md) — every concept, how a run flows, what gets installed, your role versus your AI's.
+
+## How to use it — three on-ramps
+
+1. **You have a coding agent** (Claude Code, Cursor, Codex, Copilot, Amp…): open this repo with it and say **"Read IMPLEMENT.md and walk me through it."**
+2. **You have a chat-only AI:** paste `IMPLEMENT.md` into the chat, create the files yourself, and keep `STATUS.md` as a note you paste back each session.
+3. **No AI at all:** read `IMPLEMENT.md` yourself — every step is doable by hand.
+
+**Model recommendation:** run the install on the most capable model you have, at high reasoning effort.
+
+## What's in here
+
+| Path | What it is |
+|---|---|
+| `OVERVIEW.md` | The full explanation — read this to understand the system before installing *(omit this row at lean explainer depth)* |
+| `IMPLEMENT.md` | The installer script, written to your AI |
+| `STATUS.md` | Install progress — scan results, decisions, phase ticks; the resume spine |
+| `AGENTS.md` / `CLAUDE.md` | Entry instructions for coding agents that auto-read those files |
+
+## What you end up with
+
+- <artifact>
+- <artifact>
+- A line in your AI's **standing instructions** so it uses this without being told.

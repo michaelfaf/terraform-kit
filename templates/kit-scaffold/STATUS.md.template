@@ -1,0 +1,46 @@
+# Kit progress
+
+> Maintained by the implementing AI. Tick tasks as they complete; record decisions the moment they're made. A fresh session resumes from this file alone.
+
+## Scan results (Phase 0)
+
+| Check | Finding |
+|---|---|
+| Platform (files? shell? subagents? persistent memory? per-task model choice?) | _pending_ |
+| Where the user's work lives | _pending_ |
+| Existing conventions / instructions file | _pending_ |
+| <kit-specific prerequisite> | _pending_ |
+
+## Decisions (Phase 1)
+
+| # | Decision | Choice | Notes |
+|---|---|---|---|
+| DP-1 | <question> | _pending_ | |
+| DP-2 | <question> | _pending_ | |
+
+## Tasks
+
+### Phase 0 — Environment scan
+- [ ] Platform + capabilities identified
+- [ ] Workspace located (or chat-only path confirmed)
+- [ ] Existing conventions read
+- [ ] Scan results recorded above
+
+### Phase 1 — Decisions
+- [ ] DP-1 through DP-<N> decided and recorded above
+
+### Phase 2 — Install
+- [ ] <artifact> created at <path>
+- [ ] Wired into the user's standing instructions file (path recorded here)
+
+### Phase 3 — First live run
+- [ ] Run completed on something real
+- [ ] Verification test passed
+
+### Phase 4 — Wrap up
+- [ ] User walked through what's installed and where
+- [ ] This file fully ticked; final state recorded
+
+## Blockers
+
+- none

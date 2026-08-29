@@ -1,0 +1,35 @@
+# Understanding <system>
+
+<One paragraph framing: what follows, and roughly how long it takes to read.>
+
+## The problem
+
+<Two or three paragraphs. The reader should recognize themselves here before they read a single instruction.>
+
+## The core idea
+
+<The mechanism in plain language — the one insight that makes the rest follow.>
+
+## The concepts
+
+<Every term the reader will meet in IMPLEMENT.md, each defined in one to three sentences. Bold the term, then define it. This section is why a stranger can follow the installer without guessing.>
+
+## How a run actually flows
+
+<A numbered walk through one real run, start to finish, so the phases in IMPLEMENT.md have something concrete to attach to.>
+
+## What gets installed, and your role
+
+<What lands on disk. What the AI does. What only a human can decide.>
+
+## Platform needs
+
+<What's required, what's recommended, and what each tier degrades to.>
+
+## What it is not
+
+<The mistakes readers make about this system, named and corrected.>
+
+## Provenance
+
+<Where this came from, how long it ran in real use, and what it has and has not been tested on. Honest — a kit that oversells its origin is not trusted twice.>
