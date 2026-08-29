@@ -29,7 +29,7 @@ If the source is bigger than one capability, say so and propose a split before w
 
 Read the **entire** source: entry doc, status/readme, every reference file, every script. On a large source, dispatch a cheap-model subagent to inventory the files and return one line per file, then read the load-bearing files yourself. No subagents? Read the entry doc and the referenced files in sequence — inventory first, skim never.
 
-Then split what you found, explicitly, in working notes:
+Then split what you found, explicitly, in working notes — write them to `<kits home>/_working/<kit-name>-extraction.md`, *outside* the kit folder, so they never ship inside the kit:
 
 - **Mechanism** — what makes it work anywhere: the jobs each file does, the protocol, the gates and tests, the pipeline logic, the rules that exist because something went wrong. **This becomes the kit.**
 - **Wiring** — what only works in the owner's world: their paths, their folder trees, their wikilinks, people's names, company/customer names, their accounts, their specific integrations. **This gets genericized, or becomes a decision point.**

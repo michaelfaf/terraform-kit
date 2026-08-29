@@ -32,7 +32,9 @@
 | `OVERVIEW.md` | The full explanation — read this to understand the system before installing *(omit this row at lean explainer depth)* |
 | `IMPLEMENT.md` | The installer script, written to your AI |
 | `STATUS.md` | Install progress — scan results, decisions, phase ticks; the resume spine |
+| `EXAMPLE-<THING>.md` | The worked example — one real run start to finish *(full explainer depth only)* |
 | `AGENTS.md` / `CLAUDE.md` | Entry instructions for coding agents that auto-read those files |
+| `templates/` and/or `skill/` | The payload — what actually gets installed |
 
 ## What you end up with
 

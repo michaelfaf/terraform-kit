@@ -41,7 +41,11 @@ Open with a blockquote addressed to the AI: this file is your script, STATUS.md 
 ("A if your platform supports X; otherwise B"), with the reasoning — if it
 is the choice the owner made, say why they made it.> Default if the user
 says "whatever you recommend": <the same conditional, spelled out>.
+
+*Record the choice in STATUS.md before moving on.*
 ```
+
+That closing line is not decoration — it is the instruction that makes the progress file work. Ship it in every block, or state it once at the top of the decisions phase and say it applies to all of them. One or the other, never neither.
 
 ## Authoring rules learned the hard way
 
@@ -68,7 +72,7 @@ Each of these came from a cold test finding a defect that authoring could not se
 Design every kit to work at all four, and name the tier switches inside the DPs:
 
 1. **Full agent** (files, shell, subagents, persistent memory) — everything on.
-2. **Mid agent** (files and shell, no subagents, no memory) — subagent gates become self-review with a stated checklist; memory handoff becomes an on-disk handoff file.
+2. **Mid agent** (files and shell, no subagents, no memory) — subagent *review* gates become self-review against a stated checklist; memory handoff becomes an on-disk handoff file. **One exception, and it is absolute: the cold test never degrades to self-review.** A mid agent writes the cold-test brief to disk, hands it to the user to run in a fresh session (or to a colleague), and records the kit as UNVERIFIED until a verdict comes back.
 3. **Chat-only AI** — the user pastes IMPLEMENT.md; the AI narrates and the user creates the files; STATUS lives in a note the user pastes back each session.
 4. **No AI** — the README's human path; every IMPLEMENT step is doable by hand.
 

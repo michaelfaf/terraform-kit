@@ -6,7 +6,8 @@
 
 | Check | Finding |
 |---|---|
-| Platform (files? shell? subagents? persistent memory? per-task model choice?) | _pending_ |
+| Platform (files? shell? subagents? persistent memory?) | _pending_ |
+| Can mechanical steps run on a cheaper model? (delegation only — never the extraction) | _pending_ |
 | Where the user's builds live (folder / vault / repo) | _pending_ |
 | Existing conventions / standing instructions file (path) | _pending_ |
 | `git` available? | _pending_ |
@@ -15,6 +16,7 @@
 | Can launch a context-free subagent? | _pending_ |
 | How the platform discovers skills (auto-loaded directory / rules-file reference / paste-only) | _pending_ |
 | Who owns the builds being packaged (user, or someone else) | _pending_ |
+| Who receives the kits — inside the org / outside the org / the public | _pending_ |
 
 ## Decisions (Phase 1)
 
@@ -42,7 +44,7 @@
 ### Phase 2 — Install
 - [ ] Procedure installed where the platform discovers it (path recorded here)
 - [ ] `<kits home>/` created with `README.md` from `templates/KIT-REGISTRY.md` — install record filled in *with the user*
-- [ ] Sanitize term list created and populated (path recorded here)
+- [ ] Sanitize term lists created and populated from the user's real terms (`.sanitize-terms` + `.sanitize-terms.cs`); gate run once to prove the command works
 - [ ] Wiring added to the user's standing instructions file (file path recorded here)
 - [ ] Install paths recorded here
 
@@ -50,15 +52,16 @@
 |---|---|
 | Procedure | _pending_ |
 | Kits home | _pending_ |
-| Term list | _pending_ |
+| Term lists | _pending_ |
+| Working-notes folder (`<kits home>/_working/`) | _pending_ |
 | Instructions file edited | _pending_ |
 
 ### Phase 3 — First live run
 - [ ] Source build chosen with the user (small, real)
-- [ ] Mechanism / wiring split written down explicitly, as two lists
+- [ ] Mechanism / wiring split written down explicitly, as two lists, in `<kits home>/_working/`
 - [ ] 3–7 decision points mined and drafted
 - [ ] Kit drafted from the scaffold, following the skeleton
-- [ ] Sanitize gate run — search clean, judgment read done, report delivered
+- [ ] Sanitize gate run — search clean, non-vacuity check done, judgment read done, report delivered
 - [ ] Approval obtained per DP-6 (visibility named in the approval)
 - [ ] Kit published / distributed per DP-2
 - [ ] Cold test run against the *distributed* copy — verdict recorded, fixes pushed

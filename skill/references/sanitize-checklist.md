@@ -32,16 +32,27 @@ Save this list — you'll reuse it for every kit from the same source. Two pract
 
 From the kit root. Both commands must produce **no output** (a clean run exits non-zero, which is the pass):
 
-```bash
-# Case-insensitive pass — the main list.
-TERMS='alice|acme|acmecorp|widgetflow|northwind'
-grep -rniE "$TERMS" . --exclude-dir=.git
+The term list from Part 0 lives in two files in the kits home, so the gate reads it instead of you retyping it each time. One pattern per line, no comments, no blank lines:
 
-# Case-sensitive, word-boundary pass — names that collide with ordinary words.
-grep -rnE '\b(Bill|Grace|Frank)\b' . --exclude-dir=.git
+- `<kits home>/.sanitize-terms` — the main list, matched case-insensitively. Plain words: `acme`, `widgetflow`, `northwind`.
+- `<kits home>/.sanitize-terms.cs` — names that collide with ordinary words, matched case-sensitively with explicit word boundaries: `\bBill\b`, `\bGrace\b`.
+
+Then, from the kit root (point `TERMS` at your kits home):
+
+```bash
+TERMS=../.sanitize-terms
+test -s "$TERMS" && test -s "$TERMS.cs" || echo "TERM LIST MISSING OR EMPTY — the gate below proves nothing"
+grep -rniEf "$TERMS"    . --exclude-dir=.git   # case-insensitive pass
+grep -rnEf  "$TERMS.cs" . --exclude-dir=.git   # case-sensitive, word-boundary pass
 ```
 
-Replace the two patterns with your own term list from Part 0. Any hit means fix and re-run — never edit the pattern to make a hit disappear. This step is mechanical; a cheap subagent can run it.
+Both must print nothing (`grep` exits 1 on no match — that is the pass).
+
+**Do not judge this by exit code alone**, and this is tested, not theoretical: when the term file is missing, some `grep` builds print an error to stderr and still **exit 0** — which reads as "match found" to a careful agent and as "fine" to a careless one, and is neither. That is why the `test -s` guard is on the first line. Read the actual output every time: no lines printed and no error printed is the only pass.
+
+Any hit means fix the **content**, then re-run — never edit the pattern to make a hit disappear. This step is mechanical; a cheap subagent can run it.
+
+**Prove the gate isn't passing vacuously**, once per kit: append a line containing three real terms to a scratch file inside the kit, re-run, confirm it fires, delete the scratch file. A gate that has never fired is a gate you have not tested.
 
 **One tested false positive:** if the kit you are sanitizing is itself *about* sanitizing (or otherwise quotes a term list), the pattern will match its own documentation. Read every hit before acting — a hit on the line that *defines* the pattern is not a leak. Exclude that file explicitly rather than weakening the pattern.
 
