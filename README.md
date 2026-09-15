@@ -2,7 +2,7 @@
 
 > **Not that Terraform.** This has nothing to do with HashiCorp Terraform or infrastructure-as-code. The name is literal: it *terraforms someone else's environment* so a system you built can live there. If that collision would confuse your team, the installer's first decision offers you a rename (`implementation-kit`) and tells you exactly what to change.
 
-A generator: it turns any system you've built into an **implementation kit** — a small repo that the *recipient's* AI reads and executes, scanning their stack, walking them through a handful of decisions, installing an adapted version, and tracking progress in a file that survives a dead chat. This repo is the generator itself, packaged as one of its own kits. Extracted from a working procedure that has produced three shipped kits and survived six cold tests.
+A generator: it turns any system you've built into an **implementation kit** — a small repo that the *recipient's* AI reads, scans their stack against, and installs an adapted version from, tracking progress in a file that survives a dead chat. Takes about 20–30 minutes to install the generator itself, then another 60–120 minutes to package and cold-test one real kit. You end up with the generator installed in your workspace, a kits home with an install record, and one real kit already built, sanitized, and cold-tested to at least 8/10.
 
 ## Read this first — what this is and why
 
@@ -16,7 +16,7 @@ A generator: it turns any system you've built into an **implementation kit** —
 
 **It is not** documentation, a template repo, or a package manager. Templates give people files and hope; this gives their AI a script, a set of choices, and a progress file — and it's tested by someone who has never seen your work.
 
-**→ Want the full picture before deciding?** Read [OVERVIEW.md](OVERVIEW.md) — every concept, how a packaging run flows, what gets installed, your role versus your AI's — then [EXAMPLE-KIT.md](EXAMPLE-KIT.md), one real build packaged start to finish. Ten minutes for both.
+**→ Want the full picture before deciding?** Read [OVERVIEW.md](OVERVIEW.md) — every concept, how a packaging run flows, what gets installed, your role versus your AI's. `EXAMPLE-KIT.md` (one real build packaged start to finish) stays as a reference file — its key numbers are in the table below, so you don't have to read it to decide.
 
 ## How to use it — three on-ramps
 
@@ -24,16 +24,42 @@ A generator: it turns any system you've built into an **implementation kit** —
 2. **You have a chat-only AI:** paste `IMPLEMENT.md` into the chat, follow along, create the files yourself, and keep `STATUS.md` as a note you paste back each session. The sanitize search becomes find-in-files in your editor; the cold test becomes a second chat window with no context. The procedure is unchanged.
 3. **No AI at all:** read `IMPLEMENT.md` yourself — every step is doable by hand, and a kit is just markdown files.
 
-**What you'll need:** nothing mandatory. `git` and the GitHub CLI (`gh`) make distribution and updates much easier and the installer will ask; without them, a kit is a zipped folder that works exactly the same. A shell makes the sanitize gate a one-liner; without one, it's find-in-files. A platform that can spawn a context-free subagent makes the cold test push-button; without one, a fresh chat window does the job.
+**What you'll need:** nothing mandatory — `git`/`gh`, a shell, and a subagent-capable platform each make one step (distribution, the sanitize gate, the cold test) push-button; without them, each falls back to a manual equivalent that works the same way.
 
-**Model recommendation:** run the install — and the extraction step of every kit you build afterwards — on the most capable model you have, at high reasoning effort. Separating mechanism from wiring is the judgment the whole procedure rests on, and weaker models cut too much: they strip the subject matter along with the private details and leave a correct, unusable abstraction. The mechanical parts (the search gate, the publish commands) are fine anywhere.
+**Model recommendation:** run the install, and every kit's extraction step, on your most capable model at high reasoning effort — weaker models cut too much and leave a correct but unusable abstraction. The mechanical parts (search gate, publish commands) are fine on anything.
+
+## Where it lands
+
+| What lands | Default destination | Decided by |
+|---|---|---|
+| `skill/SKILL.md` + `skill/references/` | your skills directory, or `<workspace>/_tools/` if you don't have one | DP-1 |
+| `templates/KIT-REGISTRY.md`, installed as the kits home's `README.md` | your kits home, e.g. `<workspace>/kits/` | DP-2 |
+| one line, not a file | your standing instructions file (`CLAUDE.md` / `AGENTS.md` / rules file) | Phase 2 step 4 |
+| `.sanitize-terms` / `.sanitize-terms.cs` (created during install) | `<kits home>/` | DP-5 |
+| each finished kit (built during Phase 3) | `<kits home>/<kit-name>/` — private repo, public repo, or a plain folder | DP-2, DP-3 |
+
+No new root folder unless you don't already have one; your AI confirms each destination with you before writing.
+
+```mermaid
+flowchart LR
+    subgraph Kit
+        A[skill/SKILL.md]
+        B[templates/KIT-REGISTRY.md]
+    end
+    subgraph "Your workspace"
+        C[your skills directory]
+        D[kits home/README.md]
+    end
+    A --> C
+    B --> D
+```
 
 ## What's in here
 
 | Path | What it is |
 |---|---|
 | `OVERVIEW.md` | The full explanation — read this first to understand the system before installing |
-| `EXAMPLE-KIT.md` | The worked example: one real build packaged start to finish — extraction, decisions, sanitize report, cold-test findings — plus a translation table for other kinds of builds |
+| `EXAMPLE-KIT.md` | The worked example, start to finish: 4,027 words for a small kit (up to ~8,400 with a full procedure as payload), 5 decision points, scored 8.5/10 on its own cold test |
 | `IMPLEMENT.md` | The installer script, written to your AI (humans can follow it too) |
 | `STATUS.md` | Install progress — scan results, decisions, phase ticks; the resume spine |
 | `AGENTS.md` / `CLAUDE.md` | Entry instructions for coding agents that auto-read those files |
@@ -43,11 +69,3 @@ A generator: it turns any system you've built into an **implementation kit** —
 | `skill/references/lessons.md` | Seeded with what the first three kits taught; you append to it |
 | `templates/KIT-REGISTRY.md` | The kits index the installer creates for you, with an install record of your choices |
 | `templates/kit-scaffold/` | Stub files the generator stamps out at the start of each kit — see `templates/README.md` for what maps to which decision |
-
-## What you end up with
-
-- The **kit generator** installed where your AI finds it (or kept as documents you paste, on chat-only).
-- A **kits home** folder with a registry index and an install record of your choices.
-- A **sanitize term list** — the words that must never survive into a kit — written down once instead of remembered each time.
-- A line in your AI's **standing instructions** so "package this for Dana" just works, without you naming a procedure.
-- **One real kit**, built during install, sanitized, published, and cold-tested to at least 8/10.
